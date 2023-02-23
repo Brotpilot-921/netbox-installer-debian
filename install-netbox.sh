@@ -2,9 +2,18 @@
 
 # variables and settings which will be used later in this script
 
+# name of config file
+config_file="configuration.py"
+
 # asks user for the netbox domain from which netbox should be accessed
 read -p "Please type in the domain from which netbox should be accessed: " netbox_domain
 netbox_domain="'$netbox_domain'"
+
+# asks user for postgres db user
+read -p "Please define a postgres user: " postgres_db_username
+
+# asks user for postgres db user password
+read -p "Please define a postgres user password for the created db user $postgres_db_username: " postgres_db_user_password
 
 # general updates 
 apt update && apt upgrade -y
@@ -39,20 +48,14 @@ cd /opt/netbox/netbox/netbox/
 
 cp configuration_example.py configuration.py
 
-# path to config file
-config_file="configuration.py"
-
-# edit lines in netbox configuration file
+# edit line in netbox configuration file
 sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \[$netbox_domain\]/g" "$config_file"
 
+# edit line in netbox configuration file
+sed -i "0,/'USER': ''/{s//'USER': '$postgres_db_username'/}" "$config_file"
 
-# username and password
-db_user="netbox"
-db_password="J5brHrAXFLQSif0K"
-
-# edit lines in netbox configuration file
-sed -i "0,/'USER': ''/{s//'USER': '$db_user'/}" "$config_file"
-sed -i "0,/'PASSWORD': ''/{s//'PASSWORD': '$db_password'/}" "$config_file"
+# edit line in netbox configuration file
+sed -i "0,/'PASSWORD': ''/{s//'PASSWORD': '$postgres_db_user_password'/}" "$config_file"
 
 
 # generates the secret key used for the netbox instance
