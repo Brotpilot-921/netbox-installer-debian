@@ -3,14 +3,14 @@
 ### installation and configuration of postgres db
 
 # update apt-cache
-sudo apt update
+apt update
 
 # postgres installation
-sudo apt install -y postgresql
+apt install -y postgresql
 
 # start and enable postgres service
-sudo systemctl start postgresql
-sudo systemctl enable postgresql
+systemctl start postgresql
+systemctl enable postgresql
 
 # creation of the netbox db
 sudo -u postgres psql -c "CREATE DATABASE netbox;"
@@ -21,28 +21,28 @@ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE netbox TO netbox;"
 
 ### installation redis
 
-sudo apt install -y redis-server
+apt install -y redis-server
 
 
 ### installation netbox itself
 
-sudo apt install -y python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev
+apt install -y python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev
 
-sudo mkdir -p /opt/
+mkdir -p /opt/
 
 cd /opt/
 
-sudo apt install -y git
+apt install -y git
 
-sudo git clone -b master --depth 1 https://github.com/netbox-community/netbox.git
+git clone -b master --depth 1 https://github.com/netbox-community/netbox.git
 
-sudo adduser --system --group netbox
+adduser --system --group netbox
 
-sudo chown --recursive netbox /opt/netbox/netbox/media/
+chown --recursive netbox /opt/netbox/netbox/media/
 
 cd /opt/netbox/netbox/netbox/
 
-sudo cp configuration_example.py configuration.py
+cp configuration_example.py configuration.py
 
 # path to config file
 config_file="configuration.py"
@@ -79,7 +79,7 @@ secret_key=$(python3 ../generate_secret_key.py)
 # edits the line in configuration.py and inserts the secret key
 sed -i "s/SECRET_KEY = ''/SECRET_KEY = '$secret_key'/g" "$config_file"
 
-sudo /opt/netbox/upgrade.sh
+/opt/netbox/upgrade.sh
 
 source /opt/netbox/venv/bin/activate
 
@@ -87,32 +87,32 @@ cd /opt/netbox/netbox
 
 python3 manage.py createsuperuser
 
-sudo ln -s /opt/netbox/contrib/netbox-housekeeping.sh /etc/cron.daily/netbox-housekeeping
+ln -s /opt/netbox/contrib/netbox-housekeeping.sh /etc/cron.daily/netbox-housekeeping
 
 
-sudo cp /opt/netbox/contrib/gunicorn.py /opt/netbox/gunicorn.py
+cp /opt/netbox/contrib/gunicorn.py /opt/netbox/gunicorn.py
 
 
-sudo cp -v /opt/netbox/contrib/*.service /etc/systemd/system/
+cp -v /opt/netbox/contrib/*.service /etc/systemd/system/
 
-sudo systemctl daemon-reload
+systemctl daemon-reload
 
-sudo systemctl start netbox netbox-rq
+systemctl start netbox netbox-rq
 
-sudo systemctl enable netbox netbox-rq
+systemctl enable netbox netbox-rq
 
 systemctl status netbox.service
 
 
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 -keyout /etc/ssl/private/netbox.key \
 -out /etc/ssl/certs/netbox.crt
 
-sudo apt install -y apache2
+apt install -y apache2
 
-sudo cp /opt/netbox/contrib/apache.conf /etc/apache2/sites-available/netbox.conf
+cp /opt/netbox/contrib/apache.conf /etc/apache2/sites-available/netbox.conf
 
 
-sudo a2enmod ssl proxy proxy_http headers
-sudo a2ensite netbox
-sudo systemctl restart apache2
+a2enmod ssl proxy proxy_http headers
+a2ensite netbox
+systemctl restart apache2
