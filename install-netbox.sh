@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# variables and settings which will be used later in this script
+
+# asks user for the netbox domain from which netbox should be accessed
+read -p "Please type in the domain from which netbox should be accessed: " netbox_domain
+netbox_domain="'$netbox_domain'"
+
+
 ### installation and configuration of postgres db
 
 # update apt-cache
@@ -47,17 +54,9 @@ cp configuration_example.py configuration.py
 # path to config file
 config_file="configuration.py"
 
-# asks user for the netbox domain(s), from which netbox will be accessed
-read -p "Geben Sie den Text ein, der in der Liste der zulässigen Hosts eingetragen werden soll: " allowed_host_text
-allowed_host_text="'$allowed_host_text'"
-
 # edit lines in netbox configuration file
-sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \[$allowed_host_text\]/g" "$config_file"
+sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \[$netbox_domain\]/g" "$config_file"
 
-
-
-# path to config file
-config_file="configuration.py"
 
 # username and password
 db_user="netbox"
@@ -67,11 +66,6 @@ db_password="J5brHrAXFLQSif0K"
 sed -i "0,/'USER': ''/{s//'USER': '$db_user'/}" "$config_file"
 sed -i "0,/'PASSWORD': ''/{s//'PASSWORD': '$db_password'/}" "$config_file"
 
-
-
-
-# path to config file
-config_file="configuration.py"
 
 # generates the secret key used for the netbox instance
 secret_key=$(python3 ../generate_secret_key.py)

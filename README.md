@@ -7,6 +7,7 @@ It doesn't:<br>
 - detect re-runs
 - asks user how to configure specific things like users and passwords
 - look really good
+- can detect when the user types in multiple netbox domains
 
 ## Table of Contents
 
