@@ -8,6 +8,7 @@ It doesn't:<br>
 - asks user how to configure specific things like users and passwords
 - look really good
 - can detect when the user types in multiple netbox domains
+- can install netbox with nginx (currently only apache2)
 
 ## Table of Contents
 
