@@ -9,6 +9,7 @@ It doesn't:<br>
 - look really good
 - can detect when the user types in multiple netbox domains
 - can install netbox with nginx (currently only apache2)
+- work with absolute file paths
 
 ## Table of Contents
 
