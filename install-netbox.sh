@@ -6,14 +6,13 @@
 read -p "Please type in the domain from which netbox should be accessed: " netbox_domain
 netbox_domain="'$netbox_domain'"
 
+# general updates 
+apt update && apt upgrade -y
 
-### installation and configuration of postgres db
+# installation of all required packages
+apt install -y git redis-server python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev postgresql
 
-# update apt-cache
-apt update
-
-# postgres installation
-apt install -y postgresql
+### configuration of postgres db
 
 # start and enable postgres service
 systemctl start postgresql
@@ -26,20 +25,9 @@ sudo -u postgres psql -c "CREATE DATABASE netbox;"
 sudo -u postgres psql -c "CREATE USER netbox WITH PASSWORD 'J5brHrAXFLQSif0K';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE netbox TO netbox;"
 
-### installation redis
-
-apt install -y redis-server
-
-
-### installation netbox itself
-
-apt install -y python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev
-
 mkdir -p /opt/
 
 cd /opt/
-
-apt install -y git
 
 git clone -b master --depth 1 https://github.com/netbox-community/netbox.git
 
