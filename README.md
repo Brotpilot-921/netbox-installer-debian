@@ -44,7 +44,6 @@ For furthure installation and upgrade instructions, visit https://docs.netbox.de
 ## Roadmap <a name = "roadmap"></a>
 
 Plans currently in development:
-- Configuration of multiple netbox domains
 - Logging of the installation process
 
 Plans for future:

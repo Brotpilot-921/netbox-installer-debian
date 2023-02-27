@@ -15,10 +15,6 @@ else
     # name of config file
     config_file="configuration.py"
 
-    # asks user for the netbox domain from which netbox should be accessed
-    read -p "Please type in the domain from which netbox should be accessed: " netbox_domain
-    netbox_domain="'$netbox_domain'"
-
     # asks user for postgres db user
     read -p "Please define a postgres user: " postgres_db_user
 
@@ -43,6 +39,18 @@ else
         echo "Passwords do not match. Please try again."
     fi
     done
+
+    # Asks user for domains
+    echo "Fill in all domains from which NetBox will be accessed."
+    echo "Note: You can write a "*" to allow all domains (not recommended)."
+    read domains_input
+
+    # Convert domains into an array
+    IFS=',' read -ra domains_array <<< "$domains_input"
+
+    # Format array
+    netbox_domains=$(printf "'%s'," "${domains_array[@]}")
+    netbox_domains=${domains_string%,}  # Remove last decimal point
 
     # general updates
     echo "Updating the system"
@@ -78,7 +86,7 @@ else
     cp configuration_example.py configuration.py
 
     # edit line in netbox configuration file
-    sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \[$netbox_domain\]/g" "$config_file"
+    sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \[$netbox_domains\]/g" "$config_file"
     # edit line in netbox configuration file
     sed -i "0,/'USER': ''/{s//'USER': '$postgres_db_user'/}" "$config_file"
     # edit line in netbox configuration file
