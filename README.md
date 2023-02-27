@@ -1,14 +1,13 @@
-# NetBox Installer for Debian
+# NetBox Installer for Debian 🐧
 
-⚠️ Attention<br>
-This script should only be used on a new and fresh system as it **could** break other installed applications.<br>
+⚠️ Attention
+This script should only be used on a new and fresh system as it **could** break other installed applications.
 
 ## Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
 - [Notes](#notes)
-- [Usage](#usage)
 - [Roadmap](#roadmap)
 
 ## About <a name = "about"></a>
@@ -38,19 +37,17 @@ sudo ./install-netbox.sh
 
 ## Notes <a name = "notes"></a>
 
-This script is tested under Debian 11 Bulleseye.<br>
-For furthure installation and upgrade instructions, visit https://docs.netbox.dev/en/stable/installation/
+This script is tested under Debian 11 Bulleseye.
+For furthure installation and upgrade instructions, visit https://docs.netbox.dev/en/stable/installation/.
 
-
-## Usage <a name = "usage"></a>
-
-Things, that this script can't do
-- work with absolute file paths
 
 ## Roadmap <a name = "roadmap"></a>
 
+Plans currently in development:
+- Configuration of multiple netbox domains
+
 Plans for future:
-- add support for nginx (currently only apache2)
-- add support for other certificates (currently only self-signed certs)
-- add more error detection
-- configuration of multiple netbox domains
+- Add support for nginx (currently only apache2)
+- Add support for other certificates (currently only self-signed certs)
+- Add more error detection
+- Improving file path handeling
