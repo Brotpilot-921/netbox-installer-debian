@@ -8,7 +8,7 @@ else
     echo "netbox-rq.service and netbox.service are not running, starting..."
     
     # variables
-    netbox_install_logfile = "netbox_installation.log"
+    netbox_install_logfile="netbox_installation.log"
     
     # variables and settings which will be used later in this script
 
@@ -54,11 +54,11 @@ else
 
     # general updates
     echo "Updating the system"
-    "apt update && apt upgrade -y" &>> $netbox_install_logfile
+    apt update && apt upgrade -y
 
     # installation of all required packages
     echo "Installing all required packages"
-    "apt install -y git redis-server python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev postgresql apache2" &>> $netbox_install_logfile
+    apt install -y git redis-server python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev postgresql apache2
 
     ### configuration of postgres db
 

@@ -43,10 +43,10 @@ For furthure installation and upgrade instructions, visit https://docs.netbox.de
 
 ## Roadmap <a name = "roadmap"></a>
 
-Plans currently in development:
+Ideas currently in development:
 - Logging of the installation process
 
-Plans for future:
+Ideas for future:
 - Add support for nginx (currently only apache2)
 - Add support for other certificates (currently only self-signed certs)
 - Add more error detection
