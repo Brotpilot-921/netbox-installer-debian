@@ -1,7 +1,8 @@
 # NetBox Installer Debian
 
 ⚠️ Attention <br>
-This script is in early stage and not ready for production usage. The way I wrote the first version was by simply adding the official NetBox installation instructions in one script.<br>
+This script is in early stage and not ready for production usage.<br>
+Things, that this script can't do.<br>
 It doesn't:<br>
 - detect errors
 - look really good
