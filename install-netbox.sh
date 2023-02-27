@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if systemctl list-unit-files | grep -q "netbox-rq.service\|netbox.service"; then
-    echo "netbox-rq.service and netbox.service are running, cannot start."
+    echo "Detected NetBox services, can only start on a fresh system"
     exit 1
 else
     echo "netbox-rq.service and netbox.service are not running, starting..."
@@ -43,7 +43,7 @@ else
     apt update && apt upgrade -y
 
     # installation of all required packages
-    apt install -y git redis-server python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev postgresql
+    apt install -y git redis-server python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev postgresql apache2
 
     ### configuration of postgres db
 
@@ -106,18 +106,11 @@ else
 
     systemctl daemon-reload
 
-    systemctl start netbox netbox-rq
-
-    systemctl enable netbox netbox-rq
-
-    systemctl status netbox.service
-
+    systemctl start netbox netbox-rq && systemctl enable netbox netbox-rq
 
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/ssl/private/netbox.key \
     -out /etc/ssl/certs/netbox.crt
-
-    apt install -y apache2
 
     cp /opt/netbox/contrib/apache.conf /etc/apache2/sites-available/netbox.conf
 

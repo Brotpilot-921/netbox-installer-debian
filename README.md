@@ -2,15 +2,15 @@
 
 ⚠️ Attention <br>
 This script is in early stage and not ready for production usage.<br>
-Things, that this script can't do.<br>
-It doesn't:<br>
+Things, that this script can't do:
 - detect errors
-- look really good
 - can detect when the user types in multiple netbox domains
-- can install netbox with nginx (currently only apache2)
 - work with absolute file paths
-- ...
 
+
+Plans for future:<br>
+- add support for nginx (currently only apache2)
+- add support for other certificates (currently only self-signed certs)
 ## Table of Contents
 
 - [About](#about)
@@ -27,30 +27,23 @@ This script creates a fully functional NetBox instance on a Debian system.
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
 ### Prerequisites
-
-What things you need to install the software and how to install them.
-
-```
-Give examples
+```shell
+# Update packages
+sudo apt update
+# Install git
+sudo apt install git
+#Clone GitHub repo
+git clone https://github.com/Brotpilot-921/netbox-installer-debian.git
+# change folder 
+cd netbox-installer-debian
+# Make file executable
+chmod +x install-netbox.sh
 ```
 
 ### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
+```shell
+sudo ./install-netbox.sh
 ```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
 
 ## Usage <a name = "usage"></a>
 
