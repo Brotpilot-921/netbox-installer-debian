@@ -58,7 +58,7 @@ else
 
     # installation of all required packages
     echo "Installing all required packages"
-    apt install -y git redis-server python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev postgresql apache2
+    apt install -y git redis-server python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev postgresql
 
     ### configuration of postgres db
 
@@ -123,6 +123,7 @@ else
     -keyout /etc/ssl/private/netbox.key \
     -out /etc/ssl/certs/netbox.crt
 
+    apt install -y apache2
     # Copy NetBox apache2 config
     cp /opt/netbox/contrib/apache.conf /etc/apache2/sites-available/netbox.conf
     # Activates apache2 modules
