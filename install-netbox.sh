@@ -31,8 +31,8 @@ systemctl enable postgresql
 sudo -u postgres psql -c "CREATE DATABASE netbox;"
 
 # Creates a postgres user netbox with a password and grant access to netbox database
-sudo -u postgres psql -c 'CREATE USER "$postgres_db_username" WITH PASSWORD "$postgres_db_user_password";'
-sudo -u postgres psql -c 'GRANT ALL PRIVILEGES ON DATABASE netbox TO "$postgres_db_username";'
+sudo -u postgres psql -c "CREATE USER $postgres_db_username WITH PASSWORD '$postgres_db_user_password';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE netbox TO $postgres_db_username;"
 
 mkdir -p /opt/
 
