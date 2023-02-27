@@ -41,8 +41,8 @@ else
     done
 
     # Asks user for domains
-    echo "Fill in all domains from which NetBox will be accessed."
     echo "Note: You can write a "*" to allow all domains (not recommended)."
+    echo "Fill in all domains, seperated by decimal point from which NetBox will be accessed:"
     read domains_input
 
     # Convert domains into an array
@@ -50,7 +50,7 @@ else
 
     # Format array
     netbox_domains=$(printf "'%s'," "${domains_array[@]}")
-    netbox_domains=${domains_string%,}  # Remove last decimal point
+    netbox_domains=${netbox_domains%,}  # Remove last decimal point
 
     # general updates
     echo "Updating the system"
