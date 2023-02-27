@@ -1,10 +1,15 @@
 #!/bin/bash
 
 if systemctl list-unit-files | grep -q "netbox-rq.service\|netbox.service"; then
-    echo "Detected NetBox services, can only start on a fresh system"
+    echo "Looks like there was a NetBox allready in the past, can only start on a fresh system."
+    echo "The installer will quit now."
     exit 1
 else
     echo "netbox-rq.service and netbox.service are not running, starting..."
+    
+    # variables
+    netbox_install_logfile = "netbox_installation.log"
+    
     # variables and settings which will be used later in this script
 
     # name of config file
@@ -39,11 +44,13 @@ else
     fi
     done
 
-    # general updates 
-    apt update && apt upgrade -y
+    # general updates
+    echo "Updating the system"
+    "apt update && apt upgrade -y" &>> $netbox_install_logfile
 
     # installation of all required packages
-    apt install -y git redis-server python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev postgresql apache2
+    echo "Installing all required packages"
+    "apt install -y git redis-server python3 python3-pip python3-venv python3-dev build-essential libxml2-dev libxslt1-dev libffi-dev libpq-dev libssl-dev zlib1g-dev postgresql apache2" &>> $netbox_install_logfile
 
     ### configuration of postgres db
 

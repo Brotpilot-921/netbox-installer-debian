@@ -37,7 +37,7 @@ sudo ./install-netbox.sh
 
 ## Notes <a name = "notes"></a>
 
-This script is tested under Debian 11 Bulleseye.
+This script is tested under Debian 11 Bulleseye.<br>
 For furthure installation and upgrade instructions, visit https://docs.netbox.dev/en/stable/installation/.
 
 
@@ -45,6 +45,7 @@ For furthure installation and upgrade instructions, visit https://docs.netbox.de
 
 Plans currently in development:
 - Configuration of multiple netbox domains
+- Logging of the installation process
 
 Plans for future:
 - Add support for nginx (currently only apache2)
