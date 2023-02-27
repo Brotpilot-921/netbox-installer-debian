@@ -39,7 +39,7 @@ sudo ./install-netbox.sh
 ## Notes <a name = "notes"></a>
 
 This script is tested under Debian 11 Bulleseye.<br>
-For furthure 
+For furthure installation and upgrade instructions, visit https://docs.netbox.dev/en/stable/installation/
 
 
 ## Usage <a name = "usage"></a>
