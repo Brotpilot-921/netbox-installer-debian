@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if systemctl is-active netbox-rq.service netbox.service >/dev/null 2>&1; then
+if systemctl list-unit-files | grep -q "netbox-rq.service\|netbox.service"; then
     echo "netbox-rq.service and netbox.service are running, cannot start."
     exit 1
 else
