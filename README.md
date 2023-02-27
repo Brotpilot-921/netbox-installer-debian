@@ -1,22 +1,15 @@
-# NetBox Installer Debian
+# NetBox Installer for Debian
 
-⚠️ Attention <br>
-This script is in early stage and not ready for production usage.<br>
-Things, that this script can't do:
-- detect errors
-- can detect when the user types in multiple netbox domains
-- work with absolute file paths
+⚠️ Attention
+This script should only be used on a new and fresh system as it **could** break other installed applications.<br>
 
-
-Plans for future:<br>
-- add support for nginx (currently only apache2)
-- add support for other certificates (currently only self-signed certs)
 ## Table of Contents
 
 - [About](#about)
 - [Getting Started](#getting_started)
+- [Notes](#notes)
 - [Usage](#usage)
-- [Contributing](../CONTRIBUTING.md)
+- [Roadmap](#roadmap)
 
 ## About <a name = "about"></a>
 
@@ -24,7 +17,7 @@ This script creates a fully functional NetBox instance on a Debian system.
 
 ## Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 ```shell
@@ -37,7 +30,7 @@ git clone https://github.com/Brotpilot-921/netbox-installer-debian.git
 # change folder 
 cd netbox-installer-debian
 # Make file executable
-chmod +x install-netbox.sh
+chmod +x netbox-install.sh
 ```
 
 ### Installing
@@ -45,6 +38,20 @@ chmod +x install-netbox.sh
 sudo ./install-netbox.sh
 ```
 
+## Notes <a name = "notes"></a>
+
+This script is tested under Debian 11 Bulleseye. 
+
+
 ## Usage <a name = "usage"></a>
 
-Add notes about how to use the system.
+Things, that this script can't do
+- work with absolute file paths
+
+## Roadmap <a name = "roadmap"></a>
+
+Plans for future:
+- add support for nginx (currently only apache2)
+- add support for other certificates (currently only self-signed certs)
+- add more error detection
+- configuration of multiple netbox domains
