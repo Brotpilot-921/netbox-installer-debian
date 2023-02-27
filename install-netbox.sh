@@ -10,10 +10,29 @@ read -p "Please type in the domain from which netbox should be accessed: " netbo
 netbox_domain="'$netbox_domain'"
 
 # asks user for postgres db user
-read -p "Please define a postgres user: " postgres_db_username
+read -p "Please define a postgres user: " postgres_db_user
 
-# asks user for postgres db user password
-read -p "Please define a postgres user password for the created db user $postgres_db_username: " postgres_db_user_password
+password_match=false
+
+while [ "$password_match" = false ]
+do
+  # Eingabeaufforderung für das Passwort
+  echo "Please define a postgres user password for the created db user $postgres_db_user: "
+  read -s password1
+
+  echo "Please re-enter your password: "
+  read -s password2
+
+  # Vergleich der Passwörter
+  if [ "$password1" = "$password2" ]; then
+    echo "Passwords match."
+    # Das Passwort wird in der Variablen "password" gespeichert
+    postgres_db_user_password="$password1"
+    password_match=true
+  else
+    echo "Passwords do not match. Please try again."
+  fi
+done
 
 # general updates 
 apt update && apt upgrade -y
@@ -31,8 +50,8 @@ systemctl enable postgresql
 sudo -u postgres psql -c "CREATE DATABASE netbox;"
 
 # Creates a postgres user netbox with a password and grant access to netbox database
-sudo -u postgres psql -c "CREATE USER $postgres_db_username WITH PASSWORD '$postgres_db_user_password';"
-sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE netbox TO $postgres_db_username;"
+sudo -u postgres psql -c "CREATE USER $postgres_db_user WITH PASSWORD '$postgres_db_user_password';"
+sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE netbox TO $postgres_db_user;"
 
 mkdir -p /opt/
 
@@ -52,7 +71,7 @@ cp configuration_example.py configuration.py
 sed -i "s/ALLOWED_HOSTS = \[\]/ALLOWED_HOSTS = \[$netbox_domain\]/g" "$config_file"
 
 # edit line in netbox configuration file
-sed -i "0,/'USER': ''/{s//'USER': '$postgres_db_username'/}" "$config_file"
+sed -i "0,/'USER': ''/{s//'USER': '$postgres_db_user'/}" "$config_file"
 
 # edit line in netbox configuration file
 sed -i "0,/'PASSWORD': ''/{s//'PASSWORD': '$postgres_db_user_password'/}" "$config_file"

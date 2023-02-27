@@ -5,10 +5,9 @@ This script is in early stage and not ready for production usage. The way I wrot
 It doesn't:<br>
 - detect errors
 - detect re-runs
-- asks user how to configure specific things like users and passwords
 - look really good
 - can detect when the user types in multiple netbox domains
-- can't install netbox with nginx (currently only apache2)
+- can install netbox with nginx (currently only apache2)
 - work with absolute file paths
 - ...
 
