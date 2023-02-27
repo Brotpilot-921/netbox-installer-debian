@@ -17,8 +17,6 @@ This script creates a fully functional NetBox instance on a Debian system.
 
 ## Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
-
 ### Prerequisites
 ```shell
 # Update packages
@@ -40,7 +38,8 @@ sudo ./install-netbox.sh
 
 ## Notes <a name = "notes"></a>
 
-This script is tested under Debian 11 Bulleseye. 
+This script is tested under Debian 11 Bulleseye.<br>
+For furthure 
 
 
 ## Usage <a name = "usage"></a>
