@@ -1,6 +1,6 @@
 # NetBox Installer for Debian 🐧
 
-⚠️ Attention
+⚠️ Attention!
 This script should only be used on a new and fresh system as it **could** break other installed applications.
 
 ## Table of Contents
