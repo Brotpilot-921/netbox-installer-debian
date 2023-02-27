@@ -4,7 +4,6 @@
 This script is in early stage and not ready for production usage. The way I wrote the first version was by simply adding the official NetBox installation instructions in one script.<br>
 It doesn't:<br>
 - detect errors
-- detect re-runs
 - look really good
 - can detect when the user types in multiple netbox domains
 - can install netbox with nginx (currently only apache2)
